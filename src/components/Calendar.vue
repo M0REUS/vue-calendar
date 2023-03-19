@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Day from './Day.vue'
-import { daysOfMonth } from '../helpers/calendarHelper'
+import { DaysList, daysOfMonth } from '../helpers/calendarHelper'
 import { ref, watch } from 'vue'
 
 const props = defineProps<{
@@ -8,7 +8,7 @@ const props = defineProps<{
   year: number
 }>()
 
-const daysInThisMonth = ref<Array<{value: number, currentMonth: boolean}>>([]);
+const daysInThisMonth = ref<DaysList>([]);
 watch(props, newProps => daysInThisMonth.value = daysOfMonth(newProps.year, newProps.month), {immediate: true})
 
 function getWeekDays(locale: string)
