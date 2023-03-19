@@ -1,0 +1,118 @@
+html,
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+p,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+blockquote,
+figure,
+fieldset,
+legend,
+textarea,
+pre,
+iframe,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+}
+/* List */
+ul,
+ol {
+  list-style: none;
+}
+/* Links */
+a {
+  font-family: inherit;
+}
+/* Form */
+button,
+input,
+select,
+textarea {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+}
+/* Box sizing */
+html {
+  box-sizing: border-box;
+}
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: inherit;
+  &::before,::after {
+    box-sizing: inherit;
+  }
+}
+/* Media */
+img,
+embed,
+object,
+audio,
+video {
+  height: auto;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+/* Iframe */
+iframe {
+  border: 0;
+}
+/* Table */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+tr {
+  vertical-align: top;
+}
+td,
+th {
+  padding: 0;
+  text-align: left;
+}
+
+/* Outline none */
+input,
+textarea {
+  outline: none;
+  &:active {
+    outline: none;
+  }
+}
+:focus {
+  outline: none;
+}
+button:active,
+button:focus {
+  outline: none !important;
+}
+textarea {
+  overflow: auto;
+  resize: none;
+}

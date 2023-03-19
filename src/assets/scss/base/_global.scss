@@ -1,0 +1,131 @@
+/* Global font */
+* {
+  font-family: $main-font;
+}
+
+:root {
+  --main-text-color: #{$main-text-color};
+  --dark-text-color: #{$dark-text-color};
+  --main-bg-color: #{$main-bg-color};
+  --light-bg-color: #{$light-bg-color};
+  // --gray-bg-color: #BCBEBB;
+  // --middle-gray-bg-color: #898B88;
+  // --dark-gray-bg-color: #595b58;
+  // --dark-bg-color: #2e2f2d;
+  --primary-color: #{$primary-color};
+  --hover-primary-color: #{$hover-primary-color};
+  --dark-primary-color: #{$dark-primary-color};
+  --secondary-color: #{$secondary-color};
+  --hover-secondary-color: #{$hover-secondary-color};
+  --dark-secondary-color: #{$dark-secondary-color};
+  font-family: $main-font;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: var(--main-text-color);
+  background-color: var(--main-bg-color);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --main-text-color: $dark-text-color;
+    --main-bg-color: $light-bg-color;
+    --light-bg-color: $main-bg-color;
+  }
+}
+
+/* Global styles */
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
+}
+
+a {
+  text-decoration: none;
+  &:hover {
+    color: var(--primary-color);
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $title-font;
+}
+
+.main {
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex: 0 0 auto;
+}
+
+/* Container styles */
+.container {
+  width: 100%;
+  max-width: rem(1440px);
+  margin: 0 auto;
+  padding: 0 rem(20px);
+}
+
+/* Responsive iFrame styles */
+.responsive-iframe iframe {
+  aspect-ratio: 16 / 9;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Basic button style */
+.button {
+  display: block;
+  width: fit-content;
+  padding: rem(6px) rem(16px);
+  font-size: rem(20px);
+  font-weight: 700;
+  color: var(--main-text-color);
+  border: 1px solid var(--light-bg-color);
+  border-radius: rem(5px);
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    color: var(--dark-text-color);
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+}
+
+.title {
+  word-break: break-word;
+  text-transform: uppercase;
+  font-size: 60px;
+  font-weight: 700;
+  margin-bottom: rem(32px);
+  width: fit-content;
+  margin-left: rem(-32px);
+  padding: rem(32px);
+  background-color: rgba($color: var(--main-bg-color), $alpha: .9);
+  border-radius: rem(5px);
+}

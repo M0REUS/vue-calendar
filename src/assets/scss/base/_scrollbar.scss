@@ -1,0 +1,7 @@
+::-webkit-scrollbar {
+  width: rem(10px);
+  background-color: scale-color($color: $gray-bg-color, $lightness: 40%);
+  &-thumb {
+    background-color: $dark-gray-bg-color;
+  }
+}

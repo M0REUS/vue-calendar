@@ -1,0 +1,29 @@
+@import 'rem-mixin';
+
+/* Fonts */
+$main-font: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+$title-font: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+/* Colors */
+$main-text-color: #F2F4F1;
+$dark-text-color: #2e2f2d;
+$main-bg-color: #2e2f2d;
+$light-bg-color: #F2F4F1;
+$gray-bg-color: #BCBEBB;
+$middle-gray-bg-color: #898B88;
+$dark-gray-bg-color: #595b58;
+$primary-color: #213547;
+$hover-primary-color: scale-color($color: $primary-color, $lightness: +15%);
+$dark-primary-color: #213547;
+$secondary-color: #213547;
+$hover-secondary-color: scale-color($color: $secondary-color, $lightness: +15%);
+$dark-secondary-color: #213547;
+
+//scale-color($color: #EE1C25, $lightness: -30%);
+//scale-color($color: #EE1C25, $blackness: +30%);
+//rgba($color: #000000, $alpha: 1.0)
+
+/* Media */
+$tablet: rem(1200px);
+$mobile: rem(767px);
+$small-mobile: rem(479px);
