@@ -2,37 +2,45 @@
 
 defineProps<{
   dayNumber: number,
-  dayName: string | null,
   isCurrentMonth: boolean
 }>()
 
 </script>
 
 <template>
-  <li class="calendar_item">
-    <span class="day-name" v-if="!!dayName">{{ dayName }}</span>
-    <span :class="`day-number ${!isCurrentMonth ? 'day-number-other-month' : ''}`" >{{ dayNumber }}</span>
+  <li class="day">
+    <span :class="`day_number ${!isCurrentMonth ? 'day_number-other-month' : ''}`">{{ dayNumber }}</span>
   </li>
 </template>
 
 <style scoped lang="scss">
 @import "../assets/scss/utils/index.scss";
-.calendar_item {
-    display: flex;
-    flex-direction: column;
-    gap: rem(10px);
-    border: solid var(--light-bg-color);
-    border-width: 0 0 rem(1px) rem(1px);
-    padding: rem(10px);
-}
 
 .day {
-  &-name {
-    text-transform: capitalize;
-    opacity: .6;
-    font-size: rem(14px);
+  display: flex;
+  flex-direction: column;
+  gap: rem(10px);
+  border: solid var(--light-bg-color);
+  border-width: 0 0 rem(1px) rem(1px);
+  padding: rem(10px);
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 250ms ease-in-out, color 250ms ease-in-out;
+  &:hover {
+    background-color: var(--light-bg-color);
+    color: var(--dark-text-color);
   }
-  &-number-other-month {
+
+  @media (max-width: $mobile) {
+    justify-content: center;
+    align-items: center;
+    border-width: rem(1px) rem(1px) rem(1px) rem(1px);
+    border-radius: 100%;
+    aspect-ratio: 1/1;
+    padding: rem(3px);
+  }
+
+  &_number-other-month {
     opacity: .6;
   }
 }

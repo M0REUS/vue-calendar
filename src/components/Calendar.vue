@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Day from './Day.vue'
-import { DaysList, daysOfMonth } from '../helpers/calendarHelper'
+import { DaysList, getWeekDays, daysOfMonth } from '../helpers/calendarHelper'
 import { ref, watch } from 'vue'
 
 const props = defineProps<{
@@ -9,29 +9,20 @@ const props = defineProps<{
 }>()
 
 const daysInThisMonth = ref<DaysList>([]);
-watch(props, newProps => daysInThisMonth.value = daysOfMonth(newProps.year, newProps.month), {immediate: true})
-
-function getWeekDays(locale: string)
-{
-  let baseDate = new Date(Date.UTC(2017, 0, 2)); // just a Monday
-  let weekDays = [];
-  for(let i = 0; i < 7; i++)
-  {
-      weekDays.push(baseDate.toLocaleDateString(locale, { weekday: 'long' }));
-      baseDate.setDate(baseDate.getDate() + 1);
-  }
-  return weekDays;
-}
-
-const weekDays = getWeekDays('uk');
+watch(props, newProps => daysInThisMonth.value = daysOfMonth(newProps.year, newProps.month), { immediate: true })
+const weekDays = getWeekDays();
 
 </script>
 
 <template>
   <section class="calendar">
     <div class="wrapper">
-      <ul class="list">
-        <Day v-for="({value, currentMonth}, index) in daysInThisMonth" :dayNumber="value" :dayName="index <= 6 ? weekDays[index] : null" :isCurrentMonth="currentMonth" />
+      <ul class="day-name-list">
+        <li class="day-name" v-for="name in weekDays">{{ name }}</li>
+      </ul>
+      <ul class="day-list">
+        <Day v-for="({ value, currentMonth }, index) in daysInThisMonth" :dayNumber="value"
+          :isCurrentMonth="currentMonth" />
       </ul>
     </div>
   </section>
@@ -43,11 +34,36 @@ const weekDays = getWeekDays('uk');
 .wrapper {
   padding: rem(20px);
 }
-.list {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-auto-rows: 1fr;
-    border: solid var(--light-bg-color);
-    border-width: rem(1px) rem(1px) 0 0;
+
+.day-name-list {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: 1fr;
+  padding-bottom: rem(10px);
+
+  & .day-name {
+    text-align: center;
+    text-transform: capitalize;
+    opacity: .6;
+    font-size: rem(14px);
+  }
+}
+
+.day-list {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: 1fr;
+  border: solid var(--light-bg-color);
+  border-width: rem(1px) rem(1px) 0 0;
+
+  @media (max-width: $mobile) {
+    border-width: rem(1px) 0 0 0;
+    padding: rem(10px);
+    gap: rem(10px);
+  }
+
+  @media (max-width: $small-mobile) {
+    gap: rem(3px);
+  }
 }
 </style>
