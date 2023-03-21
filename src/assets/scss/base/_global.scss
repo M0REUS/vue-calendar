@@ -36,9 +36,10 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --main-text-color: $dark-text-color;
-    --main-bg-color: $light-bg-color;
-    --light-bg-color: $main-bg-color;
+    --main-text-color: #{$dark-text-color};
+    --dark-text-color: #{$main-text-color};
+    --main-bg-color: #{$light-bg-color};
+    --light-bg-color: #{$main-bg-color};
   }
 }
 
