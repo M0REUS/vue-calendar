@@ -1,22 +1,24 @@
 <script setup lang="ts">
 import Day from './Day.vue'
 import { DaysList, getWeekDays, daysOfMonth } from '../helpers/calendarHelper'
+import { getDate, incrMonth, decrMonth } from '../composables/useCalendar';
 import { ref, watch } from 'vue'
 
-const props = defineProps<{
-  month: number,
-  year: number
-}>()
+const date = getDate();
+
 
 const daysInThisMonth = ref<DaysList>([]);
-watch(props, newProps => daysInThisMonth.value = daysOfMonth(newProps.year, newProps.month), { immediate: true })
+watch(date, newDate => daysInThisMonth.value = daysOfMonth(newDate.year, newDate.month), { immediate: true })
 const weekDays = getWeekDays();
 
 const selectedDay = ref(-1)
 
 function isSelectedDay(index: number, curMonth: boolean) {
-  if(!curMonth) {
-    
+  if(!curMonth && index > 15) {
+    decrMonth();
+  }
+  if(!curMonth && index < 15) {
+    incrMonth();
   }
   if (selectedDay.value === index) {
     selectedDay.value = -1;
@@ -25,9 +27,9 @@ function isSelectedDay(index: number, curMonth: boolean) {
   }
 }
 
-const date = new Date();
-const currentDay = date.getDate();
-const thisMonth = date.getMonth();
+// const date = new Date();
+const currentDay = new Date().getDate();
+const thisMonth = new Date().getMonth();
 
 </script>
 
@@ -39,7 +41,7 @@ const thisMonth = date.getMonth();
       </ul>
       <ul class="day-list">
         <Day v-for="({ value, currentMonth }, index) in daysInThisMonth" :dayNumber="value" :isCurrentMonth="currentMonth"
-          :isCurrentDay="currentDay === value && thisMonth === month" :isSelected="selectedDay === value && currentMonth"
+          :isCurrentDay="currentDay === value && thisMonth === date.month" :isSelected="selectedDay === value && currentMonth"
           @click="isSelectedDay(value, currentMonth)" />
       </ul>
     </div>

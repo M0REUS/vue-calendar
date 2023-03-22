@@ -1,31 +1,20 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { getLocale } from '../helpers/calendarHelper';
-// import { getDate, setDate, incrMonth, decrMonth } from '../composables/useCalendar';
-
-defineProps<{
-  currentMonth: number,
-  currentYear: number
-}>();
+import { getDate, setDate, incrMonth, decrMonth } from '../composables/useCalendar';
 
 const locale = getLocale();
 
-const date = ref<Date>(new Date());
-// const date = getDate();
-const month = computed(() => date.value.toLocaleDateString(locale, { month: 'long' }));
-// const month = computed(() => new Date(date.year, date.month, date.day).toLocaleDateString(locale, { month: 'long' }));
-const year = computed(() => date.value.getFullYear());
-// const year = computed(() => date.year);
+const date = getDate();
+setDate(new Date());
+const month = computed(() => new Date(date.year, date.month, date.day).toLocaleDateString(locale, { month: 'long' }));
+const year = computed(() => date.year);
 
-const changeMonth = (incrDecr: boolean) => date.value = new Date(date.value.setMonth(date.value.getMonth() + (incrDecr ? 1 : -1)))
-// const changeMonth = (incrDecr: boolean) => incrDecr ? incrMonth() : decrMonth();
-const today = () => date.value = new Date();
-// const today = () => setDate(new Date());
-
-const emits = defineEmits(['update:currentMonth', 'update:currentYear'])
-
-watch(() => date.value.getMonth(), (currentMonth) => emits("update:currentMonth", currentMonth), { immediate: true });
-watch(() => date.value.getFullYear(), (currentYear) => emits("update:currentYear", currentYear), { immediate: true });
+const changeMonth = (incrDecr: boolean) => incrDecr ? incrMonth() : decrMonth();
+const today = () => {
+  setDate(new Date());
+  
+};
 
 </script>
 
