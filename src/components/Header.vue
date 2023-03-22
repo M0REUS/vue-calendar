@@ -13,7 +13,6 @@ const year = computed(() => date.year);
 const changeMonth = (incrDecr: boolean) => incrDecr ? incrMonth() : decrMonth();
 const today = () => {
   setDate(new Date());
-  
 };
 
 </script>
@@ -123,4 +122,5 @@ const today = () => {
       }
     }
   }
-}</style>
+}
+</style>

@@ -14,10 +14,10 @@ const weekDays = getWeekDays();
 const selectedDay = ref(-1)
 
 function isSelectedDay(index: number, curMonth: boolean) {
-  if(!curMonth && index > 15) {
+  if (!curMonth && index > 15) {
     decrMonth();
   }
-  if(!curMonth && index < 15) {
+  if (!curMonth && index < 15) {
     incrMonth();
   }
   if (selectedDay.value === index) {
@@ -41,8 +41,8 @@ const thisMonth = new Date().getMonth();
       </ul>
       <ul class="day-list">
         <Day v-for="({ value, currentMonth }, index) in daysInThisMonth" :dayNumber="value" :isCurrentMonth="currentMonth"
-          :isCurrentDay="currentDay === value && thisMonth === date.month" :isSelected="selectedDay === value && currentMonth"
-          @click="isSelectedDay(value, currentMonth)" />
+          :isCurrentDay="currentDay === value && thisMonth === date.month"
+          :isSelected="selectedDay === value && currentMonth" @click="isSelectedDay(value, currentMonth)" />
       </ul>
     </div>
   </section>
