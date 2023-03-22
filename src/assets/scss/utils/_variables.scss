@@ -12,12 +12,12 @@ $light-bg-color: #F2F4F1;
 $gray-bg-color: #BCBEBB;
 $middle-gray-bg-color: #898B88;
 $dark-gray-bg-color: #595b58;
-$primary-color: #213547;
-$hover-primary-color: scale-color($color: $primary-color, $lightness: +15%);
-$dark-primary-color: #213547;
-$secondary-color: #213547;
-$hover-secondary-color: scale-color($color: $secondary-color, $lightness: +15%);
-$dark-secondary-color: #213547;
+$primary-color: #6c2ca8;
+$hover-primary-color: scale-color($color: $primary-color, $lightness: +25%);
+$dark-primary-color: #6c2ca8;
+$secondary-color: #6c2ca8;
+$hover-secondary-color: scale-color($color: $secondary-color, $lightness: +25%);
+$dark-secondary-color: #6c2ca8;
 
 //scale-color($color: #EE1C25, $lightness: -30%);
 //scale-color($color: #EE1C25, $blackness: +30%);

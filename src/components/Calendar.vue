@@ -12,6 +12,23 @@ const daysInThisMonth = ref<DaysList>([]);
 watch(props, newProps => daysInThisMonth.value = daysOfMonth(newProps.year, newProps.month), { immediate: true })
 const weekDays = getWeekDays();
 
+const selectedDay = ref(-1)
+
+function isSelectedDay(index: number, curMonth: boolean) {
+  if(!curMonth) {
+    
+  }
+  if (selectedDay.value === index) {
+    selectedDay.value = -1;
+  } else {
+    selectedDay.value = index;
+  }
+}
+
+const date = new Date();
+const currentDay = date.getDate();
+const thisMonth = date.getMonth();
+
 </script>
 
 <template>
@@ -21,8 +38,9 @@ const weekDays = getWeekDays();
         <li class="day-name" v-for="name in weekDays">{{ name }}</li>
       </ul>
       <ul class="day-list">
-        <Day v-for="({ value, currentMonth }, index) in daysInThisMonth" :dayNumber="value"
-          :isCurrentMonth="currentMonth" />
+        <Day v-for="({ value, currentMonth }, index) in daysInThisMonth" :dayNumber="value" :isCurrentMonth="currentMonth"
+          :isCurrentDay="currentDay === value && thisMonth === month" :isSelected="selectedDay === value && currentMonth"
+          @click="isSelectedDay(value, currentMonth)" />
       </ul>
     </div>
   </section>
@@ -46,6 +64,10 @@ const weekDays = getWeekDays();
     text-transform: capitalize;
     opacity: .6;
     font-size: rem(14px);
+
+    @media (prefers-color-scheme: light) {
+      opacity: .7;
+    }
   }
 }
 
@@ -58,7 +80,7 @@ const weekDays = getWeekDays();
 
   @media (max-width: $mobile) {
     border-width: rem(1px) 0 0 0;
-    padding: rem(10px);
+    padding-top: rem(10px);
     gap: rem(10px);
   }
 
