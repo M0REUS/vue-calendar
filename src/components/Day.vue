@@ -44,6 +44,7 @@ defineProps<{
       }
     }
   }
+
   &-selected {
     background-color: var(--invert-bg-color);
     color: var(--invert-text-color);

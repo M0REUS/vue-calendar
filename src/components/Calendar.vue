@@ -30,6 +30,7 @@ function isSelectedDay(index: number, curMonth: boolean) {
 // const date = new Date();
 const currentDay = new Date().getDate();
 const thisMonth = new Date().getMonth();
+const currentYear = new Date().getFullYear();
 
 </script>
 
@@ -41,7 +42,7 @@ const thisMonth = new Date().getMonth();
       </ul>
       <ul class="day-list">
         <Day v-for="({ value, currentMonth }, index) in daysInThisMonth" :dayNumber="value" :isCurrentMonth="currentMonth"
-          :isCurrentDay="currentDay === value && thisMonth === date.month"
+          :isCurrentDay="currentDay === value && thisMonth === date.month && currentMonth && currentYear === date.year"
           :isSelected="selectedDay === value && currentMonth" @click="isSelectedDay(value, currentMonth)" />
       </ul>
     </div>
