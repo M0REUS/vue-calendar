@@ -2,10 +2,11 @@
 import Day from './Day.vue'
 import { DaysList, getWeekDays, daysOfMonth } from '../helpers/calendarHelper'
 import { getDate, incrMonth, decrMonth } from '../composables/useCalendar';
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 
 const date = getDate();
 
+const monthKey = computed(() => (new Date(date.year, date.month)).valueOf());
 
 const daysInThisMonth = ref<DaysList>([]);
 watch(date, newDate => daysInThisMonth.value = daysOfMonth(newDate.year, newDate.month), { immediate: true })
@@ -39,11 +40,13 @@ const thisMonth = new Date().getMonth();
       <ul class="day-name-list">
         <li class="day-name" v-for="name in weekDays">{{ name }}</li>
       </ul>
-      <ul class="day-list">
-        <Day v-for="({ value, currentMonth }, index) in daysInThisMonth" :dayNumber="value" :isCurrentMonth="currentMonth"
-          :isCurrentDay="currentDay === value && thisMonth === date.month"
-          :isSelected="selectedDay === value && currentMonth" @click="isSelectedDay(value, currentMonth)" />
-      </ul>
+      <Transition mode="out-in">
+        <ul :key="monthKey" class="day-list" >
+          <Day v-for="({ value, currentMonth }, index) in daysInThisMonth" :dayNumber="value" :isCurrentMonth="currentMonth"
+            :isCurrentDay="currentDay === value && thisMonth === date.month"
+            :isSelected="selectedDay === value && currentMonth" @click="isSelectedDay(value, currentMonth)" />
+        </ul>
+      </Transition>
     </div>
   </section>
 </template>
