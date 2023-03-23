@@ -5,3 +5,11 @@ $baseFontSize: 16px;
 @function rem($target, $current: $baseFontSize) {
   @return math.div($target, $current) * 1rem;
 }
+
+@mixin hover {
+  @media not all and (pointer: coarse) {
+    &:hover {
+      @content;
+    }
+  }
+}

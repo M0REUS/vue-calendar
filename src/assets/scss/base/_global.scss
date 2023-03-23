@@ -5,9 +5,9 @@
 
 :root {
   --main-text-color: #{$main-text-color};
-  --dark-text-color: #{$dark-text-color};
+  --invert-text-color: #{$invert-text-color};
   --main-bg-color: #{$main-bg-color};
-  --light-bg-color: #{$light-bg-color};
+  --invert-bg-color: #{$invert-bg-color};
   // --gray-bg-color: #BCBEBB;
   // --middle-gray-bg-color: #898B88;
   // --dark-gray-bg-color: #595b58;
@@ -36,10 +36,10 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --main-text-color: #{$dark-text-color};
-    --dark-text-color: #{$main-text-color};
-    --main-bg-color: #{$light-bg-color};
-    --light-bg-color: #{$main-bg-color};
+    --main-text-color: #{$invert-text-color};
+    --invert-text-color: #{$main-text-color};
+    --main-bg-color: #{$invert-bg-color};
+    --invert-bg-color: #{$main-bg-color};
   }
 }
 
@@ -107,12 +107,12 @@ h6 {
   font-size: rem(20px);
   font-weight: 700;
   color: var(--main-text-color);
-  border: 1px solid var(--light-bg-color);
+  border: 1px solid var(--invert-bg-color);
   border-radius: rem(5px);
   transition: all 0.15s ease-in-out;
   cursor: pointer;
   &:hover {
-    color: var(--dark-text-color);
+    color: var(--invert-text-color);
     background-color: var(--primary-color);
     border-color: var(--primary-color);
   }

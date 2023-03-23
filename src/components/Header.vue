@@ -60,12 +60,12 @@ const today = () => {
   & .today-btn {
     font-size: rem(16px);
     padding: rem(6px) rem(18px);
-    border: rem(1px) solid var(--light-bg-color);
+    border: rem(1px) solid var(--invert-bg-color);
     transition: background-color 250ms ease-in-out, color 25ms ease-in-out;
 
-    &:hover {
-      background-color: var(--light-bg-color);
-      color: var(--dark-text-color);
+    @include hover() {
+      background-color: var(--invert-bg-color);
+      color: var(--invert-text-color);
     }
   }
 
@@ -82,7 +82,7 @@ const today = () => {
   }
 
   & .btn {
-    border: solid var(--light-bg-color);
+    border: solid var(--invert-bg-color);
     border-width: rem(3px) rem(3px) 0 0;
     aspect-ratio: 1/1;
     width: rem(10px);
@@ -92,7 +92,7 @@ const today = () => {
       width: rem(16px);
     }
 
-    &:hover {
+    @include hover {
       border-color: var(--hover-primary-color);
     }
 

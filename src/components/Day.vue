@@ -25,17 +25,28 @@ defineProps<{
   flex-direction: column;
   align-items: center;
   gap: rem(10px);
-  border: solid var(--light-bg-color);
+  border: solid var(--invert-bg-color);
   border-width: 0 0 rem(1px) rem(1px);
   padding: rem(10px);
   text-align: center;
   cursor: pointer;
   transition: background-color 250ms ease-in-out, color 25ms ease-in-out;
 
-  &:hover,
+  @include hover {
+    background-color: var(--invert-bg-color);
+    color: var(--invert-text-color);
+
+    & .day_number-current {
+      color: var(--main-text-color);
+
+      @media (prefers-color-scheme: light) {
+        color: var(--ligth-text-color);
+      }
+    }
+  }
   &-selected {
-    background-color: var(--light-bg-color);
-    color: var(--dark-text-color);
+    background-color: var(--invert-bg-color);
+    color: var(--invert-text-color);
 
     & .day_number-current {
       color: var(--main-text-color);
@@ -78,7 +89,7 @@ defineProps<{
       background-color: var(--primary-color);
 
       @media (prefers-color-scheme: light) {
-        color: var(--dark-text-color);
+        color: var(--invert-text-color);
       }
     }
   }

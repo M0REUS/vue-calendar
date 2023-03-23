@@ -77,7 +77,7 @@ const thisMonth = new Date().getMonth();
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-auto-rows: 1fr;
-  border: solid var(--light-bg-color);
+  border: solid var(--invert-bg-color);
   border-width: rem(1px) rem(1px) 0 0;
 
   @media (max-width: $mobile) {
