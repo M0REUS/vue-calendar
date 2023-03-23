@@ -1,19 +1,17 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { computed } from 'vue';
 import { getLocale } from '../helpers/calendarHelper';
-import { getDate, setDate, incrMonth, decrMonth } from '../composables/useCalendar';
+import { useCalendarStore } from '../store/useCalendarStore'
 
 const locale = getLocale();
 
-const date = getDate();
-setDate(new Date());
-const month = computed(() => new Date(date.year, date.month, date.day).toLocaleDateString(locale, { month: 'long' }));
-const year = computed(() => date.year);
+const date = useCalendarStore();
+date.setDate(new Date());
 
-const changeMonth = (incrDecr: boolean) => incrDecr ? incrMonth() : decrMonth();
-const today = () => {
-  setDate(new Date());
-};
+const month = computed(() => new Date(date.year, date.month, date.day).toLocaleDateString(locale, { month: 'long' }));
+
+const changeMonth = (incrDecr: boolean) => incrDecr ? date.incrMonth() : date.decrMonth();
+const today = () => date.setToday();
 
 </script>
 
@@ -24,7 +22,7 @@ const today = () => {
     <nav class="date-group">
       <button class="btn btn-prev" type="button" title="previous month" @click="changeMonth(false)"></button>
       <button class="select-month" type="button" title="select month">
-        <span class="select-month_title">{{ month }} {{ year }}</span>
+        <span class="select-month_title">{{ month }} {{ date.year }}</span>
       </button>
       <button class="btn btn-next" type="button" title="next month" @click="changeMonth(true)"></button>
     </nav>

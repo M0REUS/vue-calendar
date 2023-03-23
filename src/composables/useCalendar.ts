@@ -1,3 +1,7 @@
+/*
+  This component doesn't use in code, this is just reference for replacement state managment in small projects
+*/
+
 import { reactive } from "vue";
 
 const date = reactive({

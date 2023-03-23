@@ -1,36 +1,34 @@
 <script setup lang="ts">
 import Day from './Day.vue'
+import { ref, watch, computed } from 'vue'
 import { DaysList, getWeekDays, daysOfMonth } from '../helpers/calendarHelper'
-import { getDate, incrMonth, decrMonth } from '../composables/useCalendar';
-import { ref, watch } from 'vue'
+import { useCalendarStore } from '../store/useCalendarStore'
 
-const date = getDate();
+const date = useCalendarStore();
 
 
 const daysInThisMonth = ref<DaysList>([]);
 watch(date, newDate => daysInThisMonth.value = daysOfMonth(newDate.year, newDate.month), { immediate: true })
 const weekDays = getWeekDays();
 
-const selectedDay = ref(-1)
-
 function isSelectedDay(index: number, curMonth: boolean) {
   if (!curMonth && index > 15) {
-    decrMonth();
+    date.decrMonth();
   }
   if (!curMonth && index < 15) {
-    incrMonth();
+    date.incrMonth();
   }
-  if (selectedDay.value === index) {
-    selectedDay.value = -1;
+  if (date.selectedDay === index) {
+    date.selectedDay = -1;
   } else {
-    selectedDay.value = index;
+    date.selectedDay = index;
   }
 }
 
-// const date = new Date();
-const currentDay = new Date().getDate();
-const thisMonth = new Date().getMonth();
-const currentYear = new Date().getFullYear();
+const isCurrentDay = computed<{ day: number, date: boolean }>(() => {
+  const currentDate = new Date();
+  return { day: currentDate.getDate(), date: currentDate.getMonth() === date.month && currentDate.getFullYear() === date.year };
+});
 
 </script>
 
@@ -42,8 +40,8 @@ const currentYear = new Date().getFullYear();
       </ul>
       <ul class="day-list">
         <Day v-for="({ value, currentMonth }, index) in daysInThisMonth" :dayNumber="value" :isCurrentMonth="currentMonth"
-          :isCurrentDay="currentDay === value && thisMonth === date.month && currentMonth && currentYear === date.year"
-          :isSelected="selectedDay === value && currentMonth" @click="isSelectedDay(value, currentMonth)" />
+          :isCurrentDay="isCurrentDay.day === value && isCurrentDay.date && currentMonth"
+          :isSelected="date.selectedDay === value && currentMonth" @click="isSelectedDay(value, currentMonth)" />
       </ul>
     </div>
   </section>
