@@ -1,14 +1,12 @@
 import { defineStore } from 'pinia';
 
 export const useCalendarStore = defineStore('calendarStore', {
-  state() {
-    return {
+  state: () => ({
       year: 0,
       month: 0,
       day: 0,
       selectedDay: -1
-    }
-  },
+  }),
   getters: {
     getDate(state) {
       return new Date(state.year, state.month, state.day);

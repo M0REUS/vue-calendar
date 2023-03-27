@@ -44,15 +44,19 @@
 }
 
 /* Global styles */
+#app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 html {
-  min-height: 100%;
+  height: 100%;
+  background-color: var(--main-bg-color);
 }
 
 body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--main-bg-color);
+  height: 100%;
   color: var(--main-text-color);
 }
 

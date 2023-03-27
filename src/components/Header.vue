@@ -1,28 +1,30 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { storeToRefs } from 'pinia';
 import { getLocale } from '../helpers/calendarHelper';
 import { useCalendarStore } from '../store/useCalendarStore'
 
 const locale = getLocale();
 
-const date = useCalendarStore();
-date.setDate(new Date());
+const calendarStore = useCalendarStore();
+const { year, month, day } = storeToRefs(calendarStore)
+const { setDate, incrMonth, decrMonth, setToday } = calendarStore;
+setDate(new Date());
 
-const month = computed(() => new Date(date.year, date.month, date.day).toLocaleDateString(locale, { month: 'long' }));
+const monthName = computed(() => new Date(year.value, month.value, day.value).toLocaleDateString(locale, { month: 'long' }));
 
-const changeMonth = (incrDecr: boolean) => incrDecr ? date.incrMonth() : date.decrMonth();
-const today = () => date.setToday();
+const changeMonth = (incrDecr: boolean) => incrDecr ? incrMonth() : decrMonth();
 
 </script>
 
 <template>
   <header class="header">
     <h1 class="app-title">Vue Calendar</h1>
-    <button class="today-btn" type="button" @click="today()">Today</button>
+    <button class="today-btn" type="button" @click="setToday()">Today</button>
     <nav class="date-group">
       <button class="btn btn-prev" type="button" title="previous month" @click="changeMonth(false)"></button>
       <button class="select-month" type="button" title="select month">
-        <span class="select-month_title">{{ month }} {{ date.year }}</span>
+        <span class="select-month_title">{{ monthName }} {{ year }}</span>
       </button>
       <button class="btn btn-next" type="button" title="next month" @click="changeMonth(true)"></button>
     </nav>
