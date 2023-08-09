@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import Day from './Day.vue'
-import { ref, watch, computed } from 'vue'
+import Day from './Day.vue';
+import { ref, watch, computed, watchEffect } from 'vue';
 import { storeToRefs } from 'pinia';
-import { DaysList, getWeekDays, daysOfMonth } from '../helpers/calendarHelper'
-import { useCalendarStore } from '../store/useCalendarStore'
+import { DaysList, getWeekDays, daysOfMonth } from '../helpers/calendarHelper';
+import { useCalendarStore } from '../store/useCalendarStore';
+import { DayEvent, fetchEvents } from '../helpers/eventsHelper';
 
 const calendarStore = useCalendarStore();
 const { month, year, selectedDay } = storeToRefs(calendarStore);
 const { incrMonth, decrMonth } = calendarStore;
 
-
 const daysInThisMonth = ref<DaysList>([]);
 watch(calendarStore, newDate => daysInThisMonth.value = daysOfMonth(newDate.year, newDate.month), { immediate: true })
 const weekDays = getWeekDays();
+
+const dayEvents = ref<DayEvent[]>([]);
 
 function isSelectedDay(index: number, curMonth: boolean) {
   if (!curMonth && index > 15) {
@@ -35,7 +37,7 @@ const isCurrentDay = computed<{ day: number, date: boolean }>(() => {
 
 const tName = ref('')
 
-watch([year, month], ([ newYear, newMonth ], [ oldYear, oldMonth ]) => {
+watch([year, month], ([newYear, newMonth], [oldYear, oldMonth]) => {
   /* used nested If
   if(newYear != oldYear) {
     if(newYear > oldYear) {
@@ -51,16 +53,31 @@ watch([year, month], ([ newYear, newMonth ], [ oldYear, oldMonth ]) => {
     }
   }
   */
-  if(newYear < oldYear) {
+  if (newYear < oldYear) {
     return tName.value = 'rslide';
   }
-  if(newYear > oldYear || newMonth > oldMonth) {
+  if (newYear > oldYear || newMonth > oldMonth) {
     return tName.value = 'lslide';
   } else {
     return tName.value = 'rslide';
   }
 })
 
+watchEffect(() => {
+  fetchEvents(year.value, month.value).then((events) => dayEvents.value = events);
+})
+
+function filterDayEvents(day: number, isCurrentMonth: boolean) {
+  // const eventDay = dayEvents.date
+  if (!isCurrentMonth) return [];
+  console.log(day);
+  console.log("dayEvents", dayEvents.value);
+  const filteredEvents = dayEvents.value
+    .filter((event) => (new Date(event.date)).getDate() === day)
+    .sort((a, b) => new Date(a.date + " " + a.time).valueOf() - new Date(b.date + " " + b.time).valueOf());
+  console.log(filteredEvents);
+  return filteredEvents;
+}
 </script>
 
 <template>
@@ -73,9 +90,11 @@ watch([year, month], ([ newYear, newMonth ], [ oldYear, oldMonth ]) => {
         <Transition :name="tName">
           <ul :key="month + '.' + year" class="day-list">
             <Day v-for="({ value, currentMonth }, index) in daysInThisMonth" :dayNumber="value"
-              :isCurrentMonth="currentMonth" :isCurrentDay="isCurrentDay.day === value && isCurrentDay.date && currentMonth"
+              :isCurrentMonth="currentMonth"
+              :isCurrentDay="isCurrentDay.day === value && isCurrentDay.date && currentMonth"
               :isSelected="selectedDay === value && currentMonth"
-              v-memo="[selectedDay === value && currentMonth, month, year]" @click="isSelectedDay(value, currentMonth)" />
+              v-memo="[selectedDay === value && currentMonth, month, year, dayEvents]"
+              :dayEvents="filterDayEvents(value, currentMonth)" @click="isSelectedDay(value, currentMonth)" />
           </ul>
         </Transition>
       </div>
@@ -88,17 +107,20 @@ watch([year, month], ([ newYear, newMonth ], [ oldYear, oldMonth ]) => {
 
 .calendar {
   height: 100%;
+
 }
+
 .wrapper {
   height: 100%;
-  padding: rem(20px);
+  // min-height: rem(581px);
+  padding: rem(20px) rem(20px) rem(40px);
   display: flex;
   flex-direction: column;
 }
 
 .slide-container {
   height: 100%;
-  overflow: hidden;
+  overflow-x: clip;
   position: relative;
 }
 
@@ -123,10 +145,10 @@ watch([year, month], ([ newYear, newMonth ], [ oldYear, oldMonth ]) => {
 
 .day-list {
   height: 100%;
-  min-height: rem(307px);
+  min-height: rem(510px);
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-auto-rows: 1fr;
+  grid-auto-rows: minmax(rem(100px), 1fr);
   border: solid var(--invert-bg-color);
   border-width: rem(1px) rem(1px) 0 0;
 

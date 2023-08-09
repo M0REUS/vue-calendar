@@ -1,0 +1,86 @@
+[
+  {
+    "date": "2023/03/01",
+    "time": "09:00",
+    "notification": {
+      "isOn": false,
+      "date": "2023/03/01",
+      "time": "09:00"
+    },
+    "location": "Дім",
+    "repeat": "Every Month",
+    "event": "Зняти показники лічильників"
+  },
+  {
+    "date": "2023/03/06",
+    "time": "17:00",
+    "notification": {
+      "isOn": false,
+      "date": "2023/03/06",
+      "time": "17:00"
+    },
+    "location": "Спротзал",
+    "repeat": "",
+    "event": "Похід в спорт зал"
+  },
+  {
+    "date": "2023/03/17",
+    "time": "19:00",
+    "notification": {
+      "isOn": true,
+      "date": "2023/03/17",
+      "time": "19:00"
+    },
+    "location": "Бар",
+    "repeat": "",
+    "event": "Збір з друзями"
+  },
+  {
+    "date": "2023/03/17",
+    "time": "10:00",
+    "notification": {
+      "isOn": true,
+      "date": "2023/03/17",
+      "time": "10:00"
+    },
+    "location": "Робота",
+    "repeat": "",
+    "event": "Мітінг"
+  },
+  {
+    "date": "2023/03/17",
+    "time": "10:00",
+    "notification": {
+      "isOn": true,
+      "date": "2023/03/17",
+      "time": "10:00"
+    },
+    "location": "Робота",
+    "repeat": "",
+    "event": "TEst1"
+  },
+  {
+    "date": "2023/03/17",
+    "time": "10:00",
+    "notification": {
+      "isOn": true,
+      "date": "2023/03/17",
+      "time": "10:00"
+    },
+    "location": "Робота",
+    "repeat": "",
+    "event": "Test2"
+  },
+  {
+    "date": "2023/03/30",
+    "time": "09:00",
+    "notification": {
+      "isOn": false,
+      "date": "2023/03/30",
+      "time": "09:00"
+    },
+    "location": "Магазин",
+    "repeat": "",
+    "event": "Купити продуктів"
+  }
+]

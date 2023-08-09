@@ -1,0 +1,50 @@
+[
+  {
+    "date": "2023/05/01",
+    "time": "09:00",
+    "notification": {
+      "isOn": false,
+      "date": "2023/05/01",
+      "time": "09:00"
+    },
+    "location": "Дім",
+    "repeat": "Every Month",
+    "event": "Зняти показники лічильників"
+  },
+  {
+    "date": "2023/05/12",
+    "time": "19:00",
+    "notification": {
+      "isOn": true,
+      "date": "2023/05/12",
+      "time": "19:00"
+    },
+    "location": "Бар",
+    "repeat": "",
+    "event": "Збір з друзями"
+  },
+  {
+    "date": "2023/05/15",
+    "time": "10:00",
+    "notification": {
+      "isOn": true,
+      "date": "2023/05/15",
+      "time": "10:00"
+    },
+    "location": "Робота",
+    "repeat": "",
+    "event": "Мітінг"
+  },
+  {
+    "date": "2023/05/27",
+    "time": "09:00",
+    "notification": {
+      "isOn": false,
+      "date": "2023/05/27",
+      "time": "09:00"
+    },
+    "location": "Магазин",
+    "repeat": "",
+    "event": "Купити продуктів"
+  }
+]

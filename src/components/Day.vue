@@ -1,19 +1,25 @@
 <script setup lang="ts">
+import Events from './Events.vue';
+import { DayEvent } from '../helpers/eventsHelper';
 
 defineProps<{
   dayNumber: number,
   isCurrentDay: boolean,
   isCurrentMonth: boolean,
-  isSelected: boolean
+  isSelected: boolean,
+  dayEvents: DayEvent[]
 }>()
 
 </script>
 
 <template>
   <li :class="{ 'day': true, 'day-selected': isSelected }">
-    <span
-      :class="{ 'day_number': true, 'day_number-other-month': !isCurrentMonth, 'day_number-current': isCurrentDay }">{{
-        dayNumber }}</span>
+    <span :class="{ 'day_number': true, 'day_number-other-month': !isCurrentMonth, 'day_number-current': isCurrentDay }">
+      {{ dayNumber }}
+    </span>
+    <ul class="day_event-list" v-if="dayEvents.length !== 0">
+      <Events v-for="event in dayEvents" :dayEvent="event" />
+    </ul>
   </li>
 </template>
 
@@ -93,6 +99,14 @@ defineProps<{
         color: var(--invert-text-color);
       }
     }
+  }
+
+  &_event-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: rem(5px);
+    overflow-y: auto;
   }
 }
 </style>
