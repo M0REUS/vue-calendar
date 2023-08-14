@@ -146,6 +146,7 @@ function filterDayEvents(day: number, isCurrentMonth: boolean) {
 .day-list {
   height: 100%;
   min-height: rem(510px);
+  max-height: calc(100dvh - rem(176px));
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-auto-rows: minmax(rem(100px), 1fr);

@@ -107,6 +107,7 @@ defineProps<{
     flex-direction: column;
     gap: rem(5px);
     overflow-y: auto;
+    padding-inline: rem(5px);
   }
 }
 </style>
