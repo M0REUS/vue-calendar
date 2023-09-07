@@ -131,7 +131,7 @@ function filterDayEvents(day: number, isCurrentMonth: boolean) {
   padding-bottom: rem(10px);
   flex-grow: 0;
 
-  & .day-name {
+  .day-name {
     text-align: center;
     text-transform: capitalize;
     opacity: .6;

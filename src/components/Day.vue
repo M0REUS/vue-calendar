@@ -42,7 +42,7 @@ defineProps<{
     background-color: var(--invert-bg-color);
     color: var(--invert-text-color);
 
-    & .day_number-current {
+    .day_number-current {
       color: var(--main-text-color);
 
       @media (prefers-color-scheme: light) {
@@ -55,7 +55,7 @@ defineProps<{
     background-color: var(--invert-bg-color);
     color: var(--invert-text-color);
 
-    & .day_number-current {
+    .day_number-current {
       color: var(--main-text-color);
 
       @media (prefers-color-scheme: light) {

@@ -45,7 +45,7 @@ const changeMonth = (incrDecr: boolean) => incrDecr ? incrMonth() : decrMonth();
     padding-bottom: 0;
   }
 
-  & .app-title {
+  .app-title {
     font-size: rem(30px);
 
     @media (max-width: $mobile) {
@@ -53,11 +53,11 @@ const changeMonth = (incrDecr: boolean) => incrDecr ? incrMonth() : decrMonth();
     }
   }
 
-  & button {
+  button {
     cursor: pointer;
   }
 
-  & .today-btn {
+  .today-btn {
     font-size: rem(16px);
     padding: rem(6px) rem(18px);
     border: rem(1px) solid var(--invert-bg-color);
@@ -69,7 +69,7 @@ const changeMonth = (incrDecr: boolean) => incrDecr ? incrMonth() : decrMonth();
     }
   }
 
-  & .date-group {
+  .date-group {
     display: flex;
     align-items: center;
     gap: rem(6px);
@@ -81,7 +81,7 @@ const changeMonth = (incrDecr: boolean) => incrDecr ? incrMonth() : decrMonth();
     }
   }
 
-  & .btn {
+  .btn {
     border: solid var(--invert-bg-color);
     border-width: rem(3px) rem(3px) 0 0;
     aspect-ratio: 1/1;
@@ -106,7 +106,7 @@ const changeMonth = (incrDecr: boolean) => incrDecr ? incrMonth() : decrMonth();
 
   }
 
-  & .select-month {
+  .select-month {
     min-width: rem(220px);
 
     @media (max-width: $mobile) {
